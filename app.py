@@ -1,13 +1,28 @@
-from flask import Flask
+from flask import Flask, request, render_template
+
+
+
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return 'Hello, World!'
+    return render_template('main.html')
 
 @app.route('/baseball')
 def baseball():
-    return '여기는 야구페이지!'
+    return render_template('baseball.html')
+
+@app.route('/search')
+def search():
+    return render_template('search.html')
+
+@app.route('/action', methods=['GET', 'POST'])
+def action():
+    if request.method == 'GET':
+        return '그냥 넘어옴(get)'
+    else :
+        name = request.form['fname']
+        return '<b>{}</b>를 검색한 결과입니다. 리스트 ~ (Post)'.format(name)
 
 @app.route('/soccer')
 def soccer():
