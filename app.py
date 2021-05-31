@@ -1,12 +1,37 @@
+from os import name
 from flask import Flask, request, render_template
 
-
+from test import idpw_ck
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
     return render_template('main.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    
+    if request.method == 'GET':
+        return render_template('signup.html')
+    else :
+        name = request.form['fname']
+        num1 = request.form['num1']
+        num2 = request.form['num2']
+        return '<b>{}</b>님 회원가입 되었습니다. 아이디:<b>{}</b>   비밀번호: <b>{}</b>(Post)'.format(name, num1, num2)
+               
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    
+    if request.method == 'GET':
+        return render_template('login.html')
+    else :
+        userid = request.form['userid']
+        pwd = request.form['pwd']
+        print(userid,pwd)
+        return  idpw_ck(userid, pwd)
+
 
 @app.route('/baseball')
 def baseball():

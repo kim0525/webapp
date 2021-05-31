@@ -3,4 +3,8 @@ def ifpung(inp):
     if inp == '1':
         print("펑하고 터졌다")
 
-
+def idpw_ck(userid, pwd):
+    if userid == 'aaa' and pwd =='1234':
+        return "로그인 성공. <br>{}<br>님 반갑습니다.".format(userid) 
+    else:
+        return"틀림"
